@@ -82,15 +82,8 @@ jobs:
         run: |
           npm install -g purgecss
           purgecss -c purgecss.config.js
-      # - name: Deploy 🚀
-      #   if: github.event_name != 'pull_request'
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     folder: _site
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Deploy 🚀
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }} # Cloudflare API token
-          accountId: 79a91ee76f99f316e505fab4ccf52b87 # Cloudflare account ID
-          projectName: jryoofdu-github-io # your Cloudflare Pages project name
-          directory: _site
+          folder: _site
