@@ -3,7 +3,7 @@ layout: default
 ---
 <div class="post">
   <header class="post-header">
-    <h1 class="post-title">
+    <h1 class="post-title" style="display: inline;">
       {% if site.title == 'blank' %}
         <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
         {{ site.last_name }}
@@ -11,6 +11,16 @@ layout: default
         {{ site.title }}
       {% endif %}
     </h1>
+    <h4 class="post-title" style="display: inline;">
+      {% if page.cv_pdf %}
+        <a
+          href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url}}"
+          target="_blank"
+          rel="noopener noreferrer"
+          >CV</a
+        >
+      {% endif %}
+    </h4>
     {% if page.profile %}
       <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
         {% if page.profile.image %}
