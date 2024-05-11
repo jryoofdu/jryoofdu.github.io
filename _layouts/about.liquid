@@ -11,16 +11,7 @@ layout: default
         {{ site.title }}
       {% endif %}
     </h1>
-    <h4 class="post-title" style="display: inline;">
-      {% if page.cv_pdf %}
-        <a
-          href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          >CV</a
-        >
-      {% endif %}
-    </h4>
+    <p class="desc">{{ page.subtitle }}</p>
     {% if page.profile %}
       <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
         {% if page.profile.image %}
@@ -29,12 +20,12 @@ layout: default
             {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle' %}
           {% else %}
             {% assign profile_image_class = 'img-fluid z-depth-1
-    rounded' %}
+  rounded' %}
           {% endif %}
           {% capture sizes %}(min-width: {{site.max_width}}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px)
-    30vw, 95vw"{% endcapture %}
+          30vw, 95vw{% endcapture %}
           {%
-            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+            include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.about.image
             cache_bust=true
           %}
         {% endif %}
@@ -43,7 +34,6 @@ layout: default
         {% endif %}
       </div>
     {% endif %}
-    <p class="desc">{{ page.subtitle }}</p>
   </header>
 
   <article>
