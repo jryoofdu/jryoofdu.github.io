@@ -21,9 +21,4 @@ Prior to joining FDU, I was a faculty member in the School of Computing and Acad
 
 I am looking for motivated students and I want to be a great adviser. I believe that this can happen if and only if we share the passion in the research area. You can tak ea look at my research page. Furthermore, the fruitful outcome comes when we are able to communicate each other well. I believe that the best way to do this is to take one of my classes or work with me on a project. If you think that we can maintain in such relationship, please send me an email on your interests in one of the topics that I work on.
 
-You can find more information about me in my <a
-          href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          >CV</a
-        >.
+You can find more information about me in my [CV]({{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url}}){:target="\_blank" rel="noopener noreferrer"}.
