@@ -57,9 +57,10 @@ nav_order: 1
       </p>
       <p class="post-tags">
         {% for season in seasons %}
-        <a href="{{ season.url }}" target="_blank">
+        <!-- <a href="{{ season.url }}" target="_blank">
           <i class="fa-solid fa-calendar fa-sm"></i> {{ season.name }}
-        </a>
+        </a> -->
+        <i class="fa-solid fa-calendar fa-sm"></i> {{ season.name }}
         {% unless forloop.last %}
           &nbsp; &middot; &nbsp;
         {% endunless %}
