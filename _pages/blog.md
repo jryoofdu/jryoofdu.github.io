@@ -4,16 +4,6 @@ permalink: /teaching/
 title: Teaching
 nav: true
 nav_order: 1
-# pagination:
-#   enabled: true
-#   collection: posts
-#   permalink: /page/:num/
-#   per_page: 5
-#   sort_field: date
-#   sort_reverse: true
-#   trail:
-#     before: 1 # The number of links before the current page
-#     after: 3 # The number of links after the current page
 ---
 
 <div class="post">
@@ -24,10 +14,10 @@ nav_order: 1
 {% if blog_name_size > 0 or blog_description_size > 0 %}
 
     <header class="post-header">
-        <h1 class="post-title">Courses</h1>
+        <h1 class="post-title">{{ page.title }}</h1>
+        <hr style="margin-top: 10px;">
         <p class="post-description">{{ page.description }}</p>
-    </header>
-    <hr />
+  </header>
 {% endif %}
 
 
@@ -49,6 +39,7 @@ nav_order: 1
   {% assign year = post.date | date: "%Y" %}
   {% assign tags = post.tags | join: "" %}
   {% assign categories = post.categories | join: "" %}
+  {% assign seasons = post.season %}
 
   <li>
 
@@ -65,30 +56,36 @@ nav_order: 1
         {% endif %}
       </p>
       <p class="post-tags">
-        <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
-          <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
-
-          {% if tags != "" %}
+        {% for season in seasons %}
+        <a href="{{ season.url }}" target="_blank">
+          <i class="fa-solid fa-calendar fa-sm"></i> {{ season.name }}
+        </a>
+        {% unless forloop.last %}
           &nbsp; &middot; &nbsp;
-            {% for tag in post.tags %}
-            <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
-              <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
-              {% unless forloop.last %}
-                &nbsp;
-              {% endunless %}
-              {% endfor %}
-          {% endif %}
+        {% endunless %}
+        {% endfor %}
 
-          {% if categories != "" %}
-          &nbsp; &middot; &nbsp;
-            {% for category in post.categories %}
-            <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
-              <i class="fa-solid fa-tag fa-sm"></i> {{ category }}</a>
-              {% unless forloop.last %}
-                &nbsp;
-              {% endunless %}
-              {% endfor %}
-          {% endif %}
+        {% if tags != "" %}
+        &nbsp; &middot; &nbsp;
+          {% for tag in post.tags %}
+          <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
+            <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
+            {% unless forloop.last %}
+              &nbsp;
+            {% endunless %}
+            {% endfor %}
+        {% endif %}
+
+        {% if categories != "" %}
+        &nbsp; &middot; &nbsp;
+          {% for category in post.categories %}
+          <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
+            <i class="fa-solid fa-tag fa-sm"></i> {{ category }}</a>
+            {% unless forloop.last %}
+              &nbsp;
+            {% endunless %}
+            {% endfor %}
+        {% endif %}
       </p>
 
   {% if post.thumbnail %}
