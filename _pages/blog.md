@@ -23,9 +23,11 @@ nav_order: 1
 
 {% if blog_name_size > 0 or blog_description_size > 0 %}
 
-  <div class="header-bar">
-    <h1>Courses</h1>
-  </div>
+    <header class="post-header">
+        <h1 class="post-title">Courses</h1>
+        <p class="post-description">{{ page.description }}</p>
+    </header>
+    <hr />
 {% endif %}
 
 
