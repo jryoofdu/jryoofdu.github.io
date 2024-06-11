@@ -11,12 +11,11 @@
   volume={},
   number={},
   pages={331-336},
-  abstract={CNNs are widely used in a variety of computer vision tasks such as image processing, image classification, etc. The state-of-the-art neural networks are bigger and have greater number of parameters which translates to greater computations and memory footprint. This makes it difficult to deploy the real-time applications using these models on resource constrained edge devices. To address this issue, pruning techniques have been explored which reduce the number of computations and memory requirements of modern CNNs with negligible loss in accuracy. In this paper, we analyze the performance of three different pruning techniques - L1-norm based filter pruning, channel pruning and weight pruning and compare the performance in terms of inference time and accuracy. We also compared the performance of the pruned networks on two different GPU architectures and found that the inference time of pruned networks is more boosted in NVIDIA V100 compared to NVIDIA GTX1080 Ti due to its superior architecture features. We also perform inference speedup comparison between the different pruning techniques and analyze performance benefits between the different pruning techniques.},
   keywords={Performance evaluation;Computer vision;Image processing;Image edge detection;Neural networks;Memory management;Graphics processing units},
   doi={10.1109/IPCCC59175.2023.10253877},
   ISSN={2374-9628},
   month={Nov},
-  url={https://ieeexplore.ieee.org/document/10253877},  
+  html={https://ieeexplore.ieee.org/document/10253877},  
 }
 
 
@@ -28,10 +27,9 @@ year = {2023},
 volume = {},
 issn = {},
 pages = {54-64},
-abstract = {Video encoding/decoding is an extremely relevant workload in our society today. Video accounts for a significant percentage of the world’s online traffic, which is expected only to be growing. Thus, it is important to understand these workloads to optimize the hardware to handle them better. There is significant interest in the royalty-free AV1 codec, but we identify that it consumes a significantly higher runtime than other popular codecs, such as H.264/AVC, H.265/HEVC, and VP9. However, the reasons for the slowdown of the AV1 codec are not well-understood by prior work to the best of our knowledge.This paper explores the reasons for the large runtimes taken by AV1 workloads. We first focus on profiling the microarchitectural characteristics of the SVT-AV1 encoder, which implements the AV1 codec, to identify acceleration opportunities with a wide spectrum of encoding parameters.We discover that the runtime of AV1 encoders is higher than other encoders because AV1 encoders require a larger number of instructions to encode the same video, rather than any significant microarchitectural inefficiencies. Among microarchitectural components, we observe branch misprediction to be the component with the most significant impact on performance. In light of this, we evaluate the performance of several different branch predictors using Championship Branch Prediction (CBP) frameworks. From this, we find that increasing the size of the branch predictor as well as using a TAGE branch predictor rather than Gshare both had a significant positive impact on branch predictor performance.We also compare the scaling of SVT-AV1 against other codecs by giving each encoder access to an increasing number of threads. Finally, we observe that SVT-AV1 contains the highest degree of parallelism of the tested encoders. Because of this, increasing concurrently running threads and optimizing branch prediction may help bridge the gap in runtime between SVT-AV1 and encoders implementing other codecs.},
 keywords = {},
 doi = {10.1109/IISWC59245.2023.00021},
-url = {https://doi.ieeecomputersociety.org/10.1109/IISWC59245.2023.00021},
+html = {https://doi.ieeecomputersociety.org/10.1109/IISWC59245.2023.00021},
 publisher = {IEEE Computer Society},
 address = {Los Alamitos, CA, USA},
 month = {oct}
@@ -47,7 +45,7 @@ month = {oct}
   pages={310-317},
   keywords={Hardware;Layout;Memory management;Frequency modulation;Random access memory;Software;Bandwidth;Heterogeneous Memory;Operating System;Non Volatile Memory;High Bandwidth Memory;Cache},
   doi={10.1109/ICCD.2018.00054},
-  url={https://ieeexplore.ieee.org/document/8615704}
+  html={https://ieeexplore.ieee.org/document/8615704}
 }
 
 @inproceedings{10.1145/3205289.3208064,
@@ -57,9 +55,8 @@ year = {2018},
 isbn = {9781450357838},
 publisher = {Association for Computing Machinery},
 address = {New York, NY, USA},
-url = {https://par.nsf.gov/servlets/purl/10080386},
+html = {https://dl.acm.org/doi/10.1145/3205289.3208064},
 doi = {10.1145/3205289.3208064},
-abstract = {Memory is becoming increasingly heterogeneous with the emergence of disparate memory technologies ranging from non-volatile memories like PCM, STT-RAM, and memristors to 3D-stacked memories like HBM. In such systems, data is of ten migrated across memory regions backed by different technologies for better overall performance. An effective migration mechanism is a prerequisite in such systems.Prior works on OS-directed page migration have focused on what data to migrate and/or on when to migrate. In this work, we demonstrate the need to investigate another dimension -- how much to migrate. Specifically, we show that the amount of data migrated in a single migration operation (called "migration granularity") is vital to the overall performance. Through analysis on real hardware, we further show that different applications benefit from different migration granularities, owing to their distinct memory access characteristics. Since this preferred migration granularity may not be known a priori, we propose a novel scheme to infer this for any given application at runtime. When implemented in the Linux OS, running on a current hardware, the performance improved by up to 36\% over a baseline with a fixed migration granularity.},
 booktitle = {Proceedings of the 2018 International Conference on Supercomputing},
 pages = {352–362},
 numpages = {11},
@@ -77,7 +74,7 @@ series = {ICS '18},
   pages={449-462},
   keywords={Switches;Virtual machining;Program processors;Business;Hardware;Memory management;Address Translation;Virtualization;Cache Partitioning},
   doi={},
-  url={https://ieeexplore.ieee.org/document/8686492}
+  html={https://ieeexplore.ieee.org/document/8686492}
 }
 
 @INPROCEEDINGS{8192494,
@@ -90,7 +87,7 @@ series = {ICS '18},
   pages={469-480},
   keywords={Random access memory;Virtualization;Program processors;Benchmark testing;Organizations;Virtual machining;Two dimensional displays;Address Translation;Very Large TLB;Virtualization;Die-Stacked DRAM},
   doi={10.1145/3079856.3080210},
-  url={https://ieeexplore.ieee.org/document/8192494},
+  html={https://ieeexplore.ieee.org/document/8192494},
 }
 
 @INPROCEEDINGS{7920838,
@@ -103,7 +100,7 @@ series = {ICS '18},
   pages={349-360},
   keywords={Bandwidth;Random access memory;Frequency modulation;Hardware;Memory management;Metadata;System-on-chip;die-stacked DRMA;subblocked;flat memory},
   doi={10.1109/HPCA.2017.20},
-  url={https://ieeexplore.ieee.org/document/7920838},
+  html={https://ieeexplore.ieee.org/document/7920838},
 }
 
 @ARTICLE{7463069,
@@ -116,7 +113,7 @@ series = {ICS '18},
   pages={3646-3660},
   keywords={Multicore processing;Scheduling algorithms;Out of order;Load management;Frequency modulation;Process control;Resource management;Network processor;load balancing;resource management},
   doi={10.1109/TC.2016.2560838},
-  url={https://ieeexplore.ieee.org/document/7463069},
+  html={https://ieeexplore.ieee.org/document/7463069},
 }
 
 @INPROCEEDINGS{7573805,
@@ -129,7 +126,7 @@ series = {ICS '18},
   pages={77-86},
   keywords={Partitioning algorithms;Load management;Hardware;Servers;Dynamic scheduling;Mirrors;Parallel processing},
   doi={10.1109/ICPP.2016.16},
-  url={https://ieeexplore.ieee.org/document/7573805}
+  html={https://ieeexplore.ieee.org/document/7573805}
 }
 
 @INPROCEEDINGS{7818338,
@@ -142,7 +139,7 @@ series = {ICS '18},
   pages={116-123},
   keywords={Training;Measurement;Benchmark testing;Predictive models;Computational modeling;Computers;Standards},
   doi={10.1109/SAMOS.2016.7818338},
-  url={https://ieeexplore.ieee.org/document/7818338}
+  html={https://ieeexplore.ieee.org/document/7818338}
 }
 
 @INPROCEEDINGS{7832830,
@@ -155,7 +152,7 @@ series = {ICS '18},
   pages={1-12},
   keywords={Partitioning algorithms;Clustering algorithms;Throughput;Synchronization;Computational modeling;Engines;Big data},
   doi={10.1145/2807591.2807632},
-  url={https://ieeexplore.ieee.org/document/7832830}
+  html={https://ieeexplore.ieee.org/document/7832830}
 }
 
 @INPROCEEDINGS{7379837,
@@ -168,7 +165,7 @@ series = {ICS '18},
   pages={82-89},
   keywords={Random access memory;Hardware;Bandwidth;Synchronization;Radiation detectors;Operating systems},
   doi={10.1109/SBAC-PAD.2015.34},
-  url={https://ieeexplore.ieee.org/document/7379837}
+  html={https://ieeexplore.ieee.org/document/7379837}
 }
 
 @INPROCEEDINGS{7379840,
@@ -181,7 +178,7 @@ series = {ICS '18},
   pages={106-113},
   keywords={Radiation detectors;Program processors;Power measurement;Microarchitecture;Hardware;Power demand;Monitoring},
   doi={10.1109/SBAC-PAD.2015.26},
-  url={https://ieeexplore.ieee.org/abstract/document/7379840}
+  html={https://ieeexplore.ieee.org/document/7379840}
 }
 
 @INPROCEEDINGS{7379841,
@@ -194,7 +191,7 @@ series = {ICS '18},
   pages={114-121},
   keywords={Databases;Benchmark testing;Servers;Peer-to-peer computing;Computers;Hardware;Measurement;Performance Evaluation;Databases;Microarchitectural performance;SQL;NoSQL;PCA Analysis},
   doi={10.1109/SBAC-PAD.2015.31},
-  url={https://ieeexplore.ieee.org/document/7379841}
+  html={https://ieeexplore.ieee.org/document/7379841}
 }
 
 @INPROCEEDINGS{7349587,
@@ -207,7 +204,7 @@ series = {ICS '18},
   pages={320-329},
   keywords={Parallel processing;Government;GPGPU;PCA;Performance},
   doi={10.1109/ICPP.2015.41},
-  url={https://ieeexplore.ieee.org/document/7349587}
+  html={https://ieeexplore.ieee.org/document/7349587}
 }
 
 @INPROCEEDINGS{7273512,
@@ -220,7 +217,7 @@ series = {ICS '18},
   pages={189-194},
   keywords={Training;Power measurement;Mechanical power transmission;Sensitivity;Estimation error;Program processors},
   doi={10.1109/ISLPED.2015.7273512},
-  url={https://ieeexplore.ieee.org/document/7273512}
+  html={https://ieeexplore.ieee.org/document/7273512}
 }
 
 @INPROCEEDINGS{6983041,
@@ -233,7 +230,7 @@ series = {ICS '18},
   pages={71-73},
   keywords={Cloud computing;Benchmark testing;Principal component analysis;Data analysis;Big data;Web search;Hardware},
   doi={10.1109/IISWC.2014.6983041},
-  url={https://ieeexplore.ieee.org/document/6983041}
+  html={https://ieeexplore.ieee.org/document/6983041}
 }
 
 @INPROCEEDINGS{6687348,
@@ -246,7 +243,7 @@ series = {ICS '18},
   pages={150-159},
   keywords={Frequency control;Multicore processing;Load management;Out of order;Hardware;Delays;Network Processors;Load Balancing;Flow Migration;Packet Order},
   doi={10.1109/ICPP.2013.24},
-  url={https://ieeexplore.ieee.org/document/6687348}
+  html={https://ieeexplore.ieee.org/document/6687348}
 }
 
 @INPROCEEDINGS{6468537,
@@ -259,5 +256,5 @@ series = {ICS '18},
   pages={1-11},
   keywords={Resilience;Reliability;Checkpointing;Random access memory;Vectors;Programming;Semantics},
   doi={10.1109/SC.2012.36},
-  url={https://ieeexplore.ieee.org/document/6468537}
+  html={https://ieeexplore.ieee.org/document/6468537}
 }
