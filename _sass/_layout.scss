@@ -4,7 +4,6 @@
 
 body {
   padding-bottom: 70px;
-  color: var(--global-text-color);
   background-color: var(--global-bg-color);
 
   h1,
@@ -14,6 +13,11 @@ body {
   h5,
   h6 {
     scroll-margin-top: 66px;
+    color: #28334A;
+  }
+
+  span: {
+    color: #28334A;
   }
 }
 
