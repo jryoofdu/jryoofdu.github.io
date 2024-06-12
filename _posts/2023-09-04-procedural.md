@@ -2,6 +2,7 @@
 layout: post
 title: COMP2510 Procedural Programming in C
 description: add description here
+university: "BCIT"
 season:
   - name: Winter 2022
     url: https://www.bcit.ca/outlines/20221086155/
