@@ -88,7 +88,7 @@
         <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
       {% endif %}
       {% if entry.html %}
-        <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
+        <a href="{{ entry.html | relative_url }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
       {% endif %}
       {% if entry.pdf %}
         <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
