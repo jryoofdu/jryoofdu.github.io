@@ -1,128 +1,73 @@
----
----
 <div class="row">
-
-  <!-- Entry bib key -->
-  <div id="{{entry.key}}" class="{% if site.enable_publication_thumbnails %}col-sm-10{% else %}col-sm-10{% endif %}">
+  <div id="{{entry.key}}" class="col-sm-10">
     <!-- Title -->
     <div class="title">{{ entry.title }}</div>
+
     <!-- Author -->
     <div class="author">
       {% assign author_array_size = entry.author_array | size %}
-
-      {% assign author_array_limit = author_array_size %}
-      {% if site.max_author_limit and author_array_size > site.max_author_limit %}
-        {% assign author_array_limit = site.max_author_limit %}
-      {% endif %}
+      {% assign author_array_limit = site.max_author_limit | default: author_array_size %}
 
       {%- for author in entry.author_array limit: author_array_limit -%}
-        {% assign author_is_self = false %}
-        {%- assign author_last_name = author.last | remove: '¶' | remove: '&' | remove: '*' | remove: '†' | remove: '^' -%}
-        {% if site.scholar.last_name contains author_last_name %}
-          {% if site.scholar.first_name contains author.first %}
-            {% assign author_is_self = true %}
-          {% endif %}
-        {%- endif -%}
-        {% assign coauthor_url = null %}
-        {%- assign clean_last_name = author_last_name | downcase | remove_accents -%}
-        {% if site.data.coauthors[clean_last_name] %}
-          {%- for coauthor in site.data.coauthors[clean_last_name] -%}
-            {% if coauthor.firstname contains author.first %}
-              {%- assign coauthor_url = coauthor.url -%}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-        {%- endif -%}
+        {% assign author_is_self = site.scholar.last_name contains author.last and site.scholar.first_name contains author.first %}
+        {% assign clean_last_name = author.last | downcase | remove_accents %}
+        {% assign coauthor_url = site.data.coauthors[clean_last_name] | where: "firstname", author.first | first | default: null %}
 
-        {%- if forloop.length > 1 -%}
-          {% if forloop.first == false %},&nbsp;{% endif %}
-          {%- if forloop.last and author_array_limit == author_array_size %}and&nbsp;{% endif -%}
-        {% endif %}
+        {%- if forloop.first == false %}, {% endif %}
+        {%- if forloop.last and author_array_limit == author_array_size %}and {% endif %}
+
         {%- if author_is_self -%}
-          <em>
-            {{- author.first }}
-            {{ author.last -}}
-          </em>
+          <em>{{ author.first }} {{ author.last }}</em>
+        {%- elsif coauthor_url -%}
+          <a href="{{ coauthor_url }}">{{ author.first }} {{ author.last }}</a>
         {%- else -%}
-          {%- if coauthor_url -%}
-            <a href="{{coauthor_url}}">
-              {{- author.first }}
-              {{ author.last -}}
-            </a>
-          {%- else -%}
-            {{- author.first }}
-            {{ author.last -}}
-          {% endif %}
+          {{ author.first }} {{ author.last }}
         {%- endif -%}
       {% endfor %}
-      {%- assign more_authors = author_array_size | minus: author_array_limit -%}
 
-      {%- assign more_authors_hide = more_authors | append: ' more author' -%}
-      {% if more_authors > 0 %}
-        {%- if more_authors > 1 -%}
-          {% assign more_authors_hide = more_authors_hide | append: 's' %}
-        {%- endif -%}
-        {% assign more_authors_show = '' %}
-        {%- for author in entry.author_array offset: author_array_limit -%}
-          {% assign more_authors_show = more_authors_show | append: author.first | append: ' ' | append: author.last %}
-          {% unless forloop.last %}
-            {% assign more_authors_show = more_authors_show | append: ', ' %}
-          {% endunless %}
-        {%- endfor -%}
+      {%- if author_array_size > author_array_limit -%}
         , and
         <span
           class="more-authors"
-          title="click to view {{more_authors_hide}}"
+          title="click to view {{ author_array_size | minus: author_array_limit }} more author{{ author_array_size | minus: author_array_limit | pluralize }}"
           onclick="
-              var element = $(this);
-              element.attr('title', '');
-              var more_authors_text = element.text() == '{{more_authors_hide}}' ? '{{more_authors_show}}' : '{{more_authors_hide}}';
-              var cursorPosition = 0;
-              var textAdder = setInterval(function(){
-                element.text(more_authors_text.substring(0, cursorPosition + 1));
-                if (++cursorPosition == more_authors_text.length){
-                  clearInterval(textAdder);
-                }
-            }, '{{site.more_authors_animation_delay}}');
+            var element = $(this);
+            element.attr('title', '');
+            var more_authors_text = element.text() == '{{ author_array_size | minus: author_array_limit }} more author{{ author_array_size | minus: author_array_limit | pluralize }}' ? '{{ entry.author_array | slice: author_array_limit, author_array_size | map: 'first' | join: ', ' }}' : '{{ author_array_size | minus: author_array_limit }} more author{{ author_array_size | minus: author_array_limit | pluralize }}';
+            element.text(more_authors_text);
           "
         >
-          {{- more_authors_hide -}}
+          {{ author_array_size | minus: author_array_limit }} more author{{ author_array_size | minus: author_array_limit | pluralize }}
         </span>
       {% endif %}
     </div>
 
     <!-- Journal/Book title and date -->
-    {% assign proceedings = 'inproceedings,incollection' | split: ',' %}
-    {% assign thesis = 'thesis,mastersthesis,phdthesis' | split: ',' %}
+    {% assign entrytype = "" %}
     {% if entry.type == 'article' %}
-      {% capture entrytype %}<em>{{entry.journal}}</em>{% endcapture %}
-    {% elsif proceedings contains entry.type %}
-      {% capture entrytype %}<em>In {{entry.booktitle}}</em> {% endcapture %}
-    {% elsif thesis contains entry.type %}
-      {% capture entrytype %}<em>{{entry.school}}</em> {% endcapture %}
-    {% else %}
-      {% capture entrytype %}{% endcapture %}
+      {% capture entrytype %}<em>{{ entry.journal }}</em>{% endcapture %}
+    {% elsif entry.type == 'inproceedings' or entry.type == 'incollection' %}
+      {% capture entrytype %}<em>In {{ entry.booktitle }}</em>{% endcapture %}
+    {% elsif entry.type == 'thesis' or entry.type == 'mastersthesis' or entry.type == 'phdthesis' %}
+      {% capture entrytype %}<em>{{ entry.school }}</em>{% endcapture %}
     {% endif %}
+
+    {% assign entrydate = "" %}
     {% if entry.month %}
-      {% capture entrymonth %}{{ " " }}{{ entry.month | capitalize }}{% endcapture %}
+      {% capture entrydate %}{{ entry.month | capitalize }}{% endcapture %}
     {% endif %}
     {% if entry.year %}
-      {% capture entryyear %}{{ " " }}{{entry.year}}{% endcapture %}
+      {% capture entrydate %}{{ entrydate }} {{ entry.year }}{% endcapture %}
     {% endif %}
     {% if entry.location %}
-      {% capture entrytype %}{{entrytype}}{{ ", " }}{{entry.location}}{% endcapture %}
-    {% endif -%}
+      {% capture entrytype %}{{ entrytype }}, {{ entry.location }}{% endcapture %}
+    {% endif %}
     {% if entry.additional_info %}
-      {% capture entrytype %}{{entrytype}}{{entry.additional_info | markdownify | remove: '<p>' | remove: '</p>' }}{% endcapture %}
+      {% capture entrytype %}{{ entrytype }}{{ entry.additional_info | markdownify | strip_html | strip }}{% endcapture %}
     {% endif %}
-    {% capture hook_exists %}{% file_exists _includes/hook/bib.liquid %}{% endcapture %}
-    {% if hook_exists == 'true' %}
-      {% include hook/bib.liquid %}
-    {% endif %}
-    {% assign entrytype_text = entrytype | strip_html | strip %}
-    {% capture periodical %}{{ entrytype }}{% if entrytype_text != "" and entryyear != "" %}, {% endif %}{{ entrymonth }}{{ entryyear }}{% endcapture %}
+
     <div class="periodical">
-      {{ periodical | strip }}
+      {{ entrytype }}{{ entrydate }}
     </div>
     <div class="periodical">
       {{ entry.note | strip }}
@@ -131,9 +76,7 @@
     <!-- Links/Buttons -->
     <div class="links">
       {% if entry.award %}
-        <a class="award btn btn-sm z-depth-0" role="button">
-          {%- if entry.award_name %}{{ entry.award_name }}{% else %}Awareded{% endif -%}
-        </a>
+        <a class="award btn btn-sm z-depth-0" role="button">{{ entry.award_name | default: 'Awarded' }}</a>
       {% endif %}
       {% if entry.abstract %}
         <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
@@ -145,29 +88,15 @@
         <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
       {% endif %}
       {% if entry.html %}
-        {% if entry.html contains '://' %}
-          <a href="{{ entry.html }}" class="btn btn-sm z-depth-0" role="button">Paper</a>
-        {% else %}
-          <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
-        {% endif %}
+        <a href="{{ entry.html | prepend: '/assets/html/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
       {% endif %}
       {% if entry.pdf %}
-        {% if entry.pdf contains '://' %}
-          <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
-        {% else %}
-          <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
-        {% endif %}
+        <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
       {% endif %}
       {% if entry.supp %}
-        {% if entry.supp contains '://' %}
-          <a href="{{ entry.supp }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-        {% else %}
-          <a href="{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-        {% endif %}
+        <a href="{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
       {% endif %}
-      {% if entry.video and site.enable_video_embedding %}
-        <a class="abstract btn btn-sm z-depth-0" role="button">Video</a>
-      {% elsif entry.video %}
+      {% if entry.video %}
         <a href="{{ entry.video }}" class="btn btn-sm z-depth-0" role="button">Video</a>
       {% endif %}
       {% if entry.blog %}
@@ -177,106 +106,55 @@
         <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
       {% endif %}
       {% if entry.poster %}
-        {% if entry.poster contains '://' %}
-          <a href="{{ entry.poster }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-        {% else %}
-          <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-        {% endif %}
+        <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
       {% endif %}
       {% if entry.slides %}
-        {% if entry.slides contains '://' %}
-          <a href="{{ entry.slides }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-        {% else %}
-          <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-        {% endif %}
+        <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
       {% endif %}
       {% if entry.website %}
         <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
       {% endif %}
     </div>
+
+    <!-- Optional badges -->
     {% if site.enable_publication_badges %}
-      {% assign entry_has_altmetric_badge = entry.altmetric or entry.doi or  entry.eprint or entry.pmid or entry.isbn %}
-      {% assign entry_has_dimensions_badge = entry.dimensions or entry.doi or entry.pmid %}
-      {% assign entry_has_google_scholar_badge = entry.google_scholar_id %}
-      {% if entry_has_altmetric_badge or entry_has_dimensions_badge or entry_has_google_scholar_badge %}
+      {% assign entry_has_badge = entry.altmetric or entry.doi or entry.eprint or entry.pmid or entry.isbn or entry.dimensions or entry.google_scholar_id %}
+      {% if entry_has_badge %}
         <div class="badges">
-          {% if site.enable_publication_badges.altmetric and entry_has_altmetric_badge %}
-            <span
-              class="altmetric-embed"
-              data-hide-no-mentions="true"
-              data-hide-less-than="15"
-              data-badge-type="2"
-              data-badge-popover="right"
-              {% if entry.eprint %}
-                data-arxiv-id="{{ entry.eprint }}"
-              {% elsif entry.doi %}
-                data-doi="{{ entry.doi }}"
-              {% elsif entry.altmetric %}
-                data-altmetric-id="{{ entry.altmetric }}"
-              {% elsif entry.pmid %}
-                data-pmid="{{ entry.pmid }}"
-              {% elsif entry.isbn %}
-                data-isbn="{{ entry.isbn }}"
-              {% endif %}
-            ></span>
+          {% if site.enable_publication_badges.altmetric and entry.altmetric %}
+            <span class="altmetric-embed" data-hide-no-mentions="true" data-hide-less-than="15" data-badge-type="2" data-badge-popover="right" data-altmetric-id="{{ entry.altmetric }}"></span>
           {% endif %}
-          {% if site.enable_publication_badges.dimensions and entry_has_dimensions_badge %}
-            <span
-              class="__dimensions_badge_embed__"
-              {% if entry.doi %}
-                data-doi="{{ entry.doi }}"
-              {% else %}
-                data-pmid="{{ entry.pmid }}"
-              {% else %}
-                data-id="{{ entry.dimensions }}"
-              {% endif %}
-              data-hide-zero-citations="true"
-              data-style="small_rectangle"
-              data-legend="hover-right"
-              style="margin-bottom: 3px;"
-            ></span>
+          {% if site.enable_publication_badges.dimensions and entry.dimensions %}
+            <span class="__dimensions_badge_embed__" data-id="{{ entry.dimensions }}" data-hide-zero-citations="true" data-style="small_rectangle" data-legend="hover-right" style="margin-bottom: 3px;"></span>
           {% endif %}
-          {% if site.enable_publication_badges.google_scholar and entry_has_google_scholar_badge %}
-            <a
-              href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.scholar_userid }}&citation_for_view={{ site.scholar_userid }}:{{ entry.google_scholar_id }}"
-              aria-label="Google Scholar link"
-              role="button"
-            >
-              <img
-                src="https://img.shields.io/badge/scholar-{% google_scholar_citations site.scholar_userid entry.google_scholar_id %}-4285F4?logo=googlescholar&labelColor=beige"
-                alt="{% google_scholar_citations site.scholar_userid entry.google_scholar_id %} Google Scholar citations"
-              >
+          {% if site.enable_publication_badges.google_scholar and entry.google_scholar_id %}
+            <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.scholar_userid }}&citation_for_view={{ site.scholar_userid }}:{{ entry.google_scholar_id }}" aria-label="Google Scholar link" role="button">
+              <img src="https://img.shields.io/badge/scholar-{% google_scholar_citations site.scholar_userid entry.google_scholar_id %}-4285F4?logo=googlescholar&labelColor=beige" alt="{% google_scholar_citations site.scholar_userid entry.google_scholar_id %} Google Scholar citations">
             </a>
           {% endif %}
         </div>
       {% endif %}
     {% endif %}
 
+    <!-- Hidden blocks for award, abstract, bibtex, video -->
     {% if entry.award %}
-      <!-- Hidden Award block -->
       <div class="award hidden d-print-inline">
         <p>{{ entry.award | markdownify }}</p>
       </div>
     {% endif %}
-
     {% if entry.abstract %}
-      <!-- Hidden abstract block -->
       <div class="abstract hidden">
         <p>{{ entry.abstract }}</p>
       </div>
     {% endif %}
-
     {% if entry.bibtex_show %}
-      <!-- Hidden bibtex block -->
       <div class="bibtex hidden">
         {% highlight bibtex %}
-        {{- entry.bibtex | hideCustomBibtex -}}
+        {{ entry.bibtex | hideCustomBibtex }}
         {% endhighlight %}
       </div>
     {% endif %}
-
-    {% if entry.video and site.enable_video_embedding %}
-      <!-- Hidden video block -->
+    {% if entry.video %}
       <div class="abstract hidden">
         <div style="text-align: center;">{% include video.liquid path=entry.video class="img-fluid rounded z-depth-1" controls=true %}</div>
       </div>
