@@ -25,7 +25,7 @@
         {%- if forloop.first == false %}, {% endif %}
         {%- if forloop.last and author_array_limit == author_array_size %}and {% endif %}
     
-          {%- if author_is_self and author.last == "Ryoo" -%}
+          {%- if author.first == "Jeeho" and author.last == "Ryoo" -%}
             <em style="border-bottom: 1px solid;">{{ author.first }} {{ author.last }}</em>
           {%- elsif coauthor_url -%}
             <a href="{{ coauthor_url }}">{{ author.first }} {{ author.last }}</a>
