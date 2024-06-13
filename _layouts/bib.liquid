@@ -13,14 +13,6 @@
         {% assign clean_last_name = author.last | downcase | remove_accents %}
         {% assign coauthor_url = site.data.coauthors[clean_last_name] | where: "firstname", author.first | first | default: null %}
         {% assign author_full_name = author.first | append: " " | append: author.last %}
-
-            <!-- Debugging output -->
-
-    {% comment %} Author first name: {{ author.first }}
-    Author last name: {{ author.last }}
-    Site scholar first name: {{ site.scholar.first_name }}
-    Site scholar last name: {{ site.scholar.last_name }}
-    Author is self: {{ author_is_self }} {% endcomment %}
     
         {%- if forloop.first == false %}, {% endif %}
         {%- if forloop.last and author_array_limit == author_array_size %}and {% endif %}
