@@ -3,6 +3,7 @@ layout: page
 title: COMP4736 Introduction to Operating Systems
 description: 
 category: BCIT
+importance: 2
 season:
   - name: Winter 2023
     url: https://www.bcit.ca/outlines/20231090326/

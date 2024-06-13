@@ -3,15 +3,14 @@ layout: page
 title: CSCI5565 Assembly Programming
 description: 
 category: FDU
+importance: 0
 season:
-  - name: Summer 2023
-    url: https://www.bcit.ca/outlines/20231090326/ 
-  - name: Fall 2023
-    url: https://www.bcit.ca/outlines/20231090326/
   - name: Summer 2024
     url: https://www.bcit.ca/outlines/20231090326/
   - name: Spring 2024
     url: https://www.bcit.ca/outlines/20231090326/
   - name: Fall 2023
     url: https://www.bcit.ca/outlines/20231090326/
+  - name: Summer 2023
+    url: https://www.bcit.ca/outlines/20231090326/ 
 ---
