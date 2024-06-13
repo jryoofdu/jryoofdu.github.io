@@ -7,24 +7,33 @@
     <div class="author">
       {% assign author_array_size = entry.author_array | size %}
       {% assign author_array_limit = site.max_author_limit | default: author_array_size %}
-
+    
       {%- for author in entry.author_array limit: author_array_limit -%}
-        {% assign author_is_self = site.scholar.last_name contains author.last and site.scholar.first_name contains author.first %}
+        {% assign author_is_self = (site.scholar.last_name == author.last and site.scholar.first_name == author.first) %}
         {% assign clean_last_name = author.last | downcase | remove_accents %}
         {% assign coauthor_url = site.data.coauthors[clean_last_name] | where: "firstname", author.first | first | default: null %}
+        {% assign author_full_name = author.first | append: " " | append: author.last %}
 
+            <!-- Debugging output -->
+
+    {% comment %} Author first name: {{ author.first }}
+    Author last name: {{ author.last }}
+    Site scholar first name: {{ site.scholar.first_name }}
+    Site scholar last name: {{ site.scholar.last_name }}
+    Author is self: {{ author_is_self }} {% endcomment %}
+    
         {%- if forloop.first == false %}, {% endif %}
         {%- if forloop.last and author_array_limit == author_array_size %}and {% endif %}
-
-        {%- if author_is_self -%}
-          <em>{{ author.first }} {{ author.last }}</em>
-        {%- elsif coauthor_url -%}
-          <a href="{{ coauthor_url }}">{{ author.first }} {{ author.last }}</a>
-        {%- else -%}
-          {{ author.first }} {{ author.last }}
-        {%- endif -%}
+    
+          {%- if author_is_self and author.last == "Ryoo" -%}
+            <em style="border-bottom: 1px solid;">{{ author.first }} {{ author.last }}</em>
+          {%- elsif coauthor_url -%}
+            <a href="{{ coauthor_url }}">{{ author.first }} {{ author.last }}</a>
+          {%- else -%}
+            {{ author.first }} {{ author.last }}
+          {%- endif -%}
       {% endfor %}
-
+    
       {%- if author_array_size > author_array_limit -%}
         , and
         <span
@@ -41,6 +50,7 @@
         </span>
       {% endif %}
     </div>
+    
 
     <!-- Journal/Book title and date -->
     {% assign entrytype = "" %}
