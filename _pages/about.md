@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Assistant Professor<br><a href='https://www.fdu.edu/academics/colleges-schools/gildart-haase/'>Gildart Haase School of Computer Sciences and Engineering</a><br><a href='https://www.fdu.edu/'>Fairleigh Dickinson University</a><br><br>254-842 Cambie St<br>Vancouver, BC.<br>778-726-4199<br> j.ryoo@fdu.edu
+subtitle: Assistant Professor<br><a href='https://www.fdu.edu/academics/colleges-schools/gildart-haase/'>Gildart Haase School of Computer Sciences and Engineering</a><br><a href='https://www.fdu.edu/'>Fairleigh Dickinson University</a><br><br>254-842 Cambie St<br>Vancouver, BC<br>778-726-4199<br> j.ryoo@fdu.edu
 cv_pdf: resume.pdf
 
 profile:
