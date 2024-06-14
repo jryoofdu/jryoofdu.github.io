@@ -46,7 +46,7 @@ display_categories: [FDU, BCIT]
     <div class="row">
           <div class="col-sm-9">
     {% endif %}
-        <h3 class="post-title">{{ project.title }}</h3>
+        <h5 class="post-title">{{ project.title }}</h5>
         <!-- <p>{{ project.description }}</p> -->
         <p class="post-meta">
           {% if project.external_source %}
