@@ -58,6 +58,11 @@
     {% if entry.month %}
       {% capture entrydate %}{{ entry.month | date: "%B" | capitalize }}{% endcapture %}
     {% endif %}
+
+    {% if entry.month and entry.type == 'article' %}
+      {% capture entrydate %}, {{ entry.month | date: "%B" | capitalize }}{% endcapture %}
+    {% endif %}
+
     {% if entry.year %}
       {% capture entrydate %}{{ entrydate }} {{ entry.year }}{% endcapture %}
     {% endif %}
