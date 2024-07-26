@@ -56,7 +56,7 @@
 
     {% assign entrydate = "" %}
     {% if entry.month %}
-      {% capture entrydate %}{{ entry.month | capitalize }}{% endcapture %}
+      {% capture entrydate %}{{ entry.month | date: "%B" | capitalize }}{% endcapture %}
     {% endif %}
     {% if entry.year %}
       {% capture entrydate %}{{ entrydate }} {{ entry.year }}{% endcapture %}
@@ -64,12 +64,17 @@
     {% if entry.location %}
       {% capture entrytype %}{{ entrytype }}, {{ entry.location }}{% endcapture %}
     {% endif %}
+    {% if entry.location and entry.month %}
+      {% capture entrytype %}{{ entrytype }}, {{ entrydate }}{% endcapture %}
+    {% elsif entrydate %}
+      {% capture entrytype %}{{ entrytype }}{{ entrydate }}{% endcapture %}
+    {% endif %}
     {% if entry.additional_info %}
       {% capture entrytype %}{{ entrytype }}{{ entry.additional_info | markdownify | strip_html | strip }}{% endcapture %}
     {% endif %}
 
     <div class="periodical">
-      {{ entrytype }}{{ entrydate }}
+      {{ entrytype }}
     </div>
     <div class="periodical">
       {{ entry.note | strip }}
