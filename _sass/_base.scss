@@ -19,7 +19,7 @@ strong {
 }
 
 span {
-  color: #28334A;
+  color: #28334a;
 }
 
 hr {
@@ -39,10 +39,10 @@ table {
 
 a,
 table.table a {
-  color: #70273D;
+  color: #70273d;
 
   &:hover {
-    color: #70273D;
+    color: #70273d;
     text-decoration: underline;
   }
 
@@ -269,7 +269,7 @@ ul.task-list input[type="checkbox"] {
 
   &:hover {
     color: var(--global-hover-color);
-    background-color: #28334A;
+    background-color: #28334a;
   }
 }
 
@@ -281,11 +281,11 @@ ul.task-list input[type="checkbox"] {
   }
 
   .navbar-brand {
-    color: #28334A;
+    color: #28334a;
   }
 
   .navbar-nav .nav-item .nav-link {
-    color: #28334A;
+    color: #28334a;
 
     &:hover {
       color: var(--global-hover-color);
@@ -295,7 +295,7 @@ ul.task-list input[type="checkbox"] {
   .navbar-nav .nav-item.active > .nav-link {
     background-color: inherit;
     font-weight: bolder;
-    color: #70273D;
+    color: #70273d;
 
     &:hover {
       color: var(--global-hover-color);
@@ -315,7 +315,7 @@ ul.task-list input[type="checkbox"] {
 
       &:hover {
         i::before {
-          color: #70273D;
+          color: #70273d;
         }
       }
     }
@@ -972,7 +972,7 @@ progress {
   background-color: transparent;
 
   /* Progress bar value for IE10  */
-  color: #70273D;;
+  color: #70273d;
 }
 
 progress::-webkit-progress-bar {

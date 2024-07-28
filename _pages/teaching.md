@@ -18,30 +18,34 @@ display_categories: [FDU, BCIT]
         <h1 class="post-title">{{ page.title }}</h1>
         <p class="post-description">{{ page.description }}</p>
     </header>
+
 {% endif %}
 
 {% if site.enable_project_categories and page.display_categories %}
+
   <!-- Display categorized projects -->
-  {% for category in page.display_categories %}
-    <h2 class="project-category">{{ category }}</h2>
-  {% assign categorized_projects = site.projects | where: "category", category %}
-  {% assign sorted_projects = categorized_projects | sort: "importance" %}
+
+{% for category in page.display_categories %}
+<h2 class="project-category">{{ category }}</h2>
+{% assign categorized_projects = site.projects | where: "category", category %}
+{% assign sorted_projects = categorized_projects | sort: "importance" %}
+
   <ul class="project-list">
   {% for project in sorted_projects %}
 
-  {% if project.external_source == blank %}
-  {% assign read_time = project.content | number_of_words | divided_by: 180 | plus: 1 %}
-  {% else %}
-  {% assign read_time = project.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
-  {% endif %}
-  {% assign year = project.date | date: "%Y" %}
-  {% assign tags = project.tags | join: "" %}
-  {% assign categories = project.categories | join: "" %}
-  {% assign seasons = project.season %}
+{% if project.external_source == blank %}
+{% assign read_time = project.content | number_of_words | divided_by: 180 | plus: 1 %}
+{% else %}
+{% assign read_time = project.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
+{% endif %}
+{% assign year = project.date | date: "%Y" %}
+{% assign tags = project.tags | join: "" %}
+{% assign categories = project.categories | join: "" %}
+{% assign seasons = project.season %}
 
     <li>
 
-  {% if project.thumbnail %}
+{% if project.thumbnail %}
 
     <div class="row">
           <div class="col-sm-9">
@@ -76,7 +80,7 @@ display_categories: [FDU, BCIT]
           {% endif %}
         </p>
 
-  {% if project.thumbnail %}
+{% if project.thumbnail %}
 
     </div>
 
@@ -87,7 +91,8 @@ display_categories: [FDU, BCIT]
     {% endif %}
     </li>
 
-  {% endfor %}
+{% endfor %}
+
   </ul>
   {% endfor %}
 
@@ -102,19 +107,19 @@ display_categories: [FDU, BCIT]
   <ul class="post-list">
   {% for project in sorted_projects %}
 
-  {% if project.external_source == blank %}
-  {% assign read_time = project.content | number_of_words | divided_by: 180 | plus: 1 %}
-  {% else %}
-  {% assign read_time = project.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
-  {% endif %}
-  {% assign year = project.date | date: "%Y" %}
-  {% assign tags = project.tags | join: "" %}
-  {% assign categories = project.categories | join: "" %}
-  {% assign seasons = project.season %}
+{% if project.external_source == blank %}
+{% assign read_time = project.content | number_of_words | divided_by: 180 | plus: 1 %}
+{% else %}
+{% assign read_time = project.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
+{% endif %}
+{% assign year = project.date | date: "%Y" %}
+{% assign tags = project.tags | join: "" %}
+{% assign categories = project.categories | join: "" %}
+{% assign seasons = project.season %}
 
     <li>
 
-  {% if project.thumbnail %}
+{% if project.thumbnail %}
 
     <div class="row">
           <div class="col-sm-9">
@@ -149,14 +154,15 @@ display_categories: [FDU, BCIT]
           {% endif %}
         </p>
 
-  {% if project.thumbnail %}
+{% if project.thumbnail %}
 
     </div>
     </div>
     {% endif %}
     </li>
 
-  {% endfor %}
+{% endfor %}
+
   </ul>
 {% endif %}
 
