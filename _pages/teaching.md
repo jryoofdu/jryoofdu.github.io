@@ -26,6 +26,7 @@ display_categories: [FDU, BCIT]
   <!-- Display categorized projects -->
 
 {% for category in page.display_categories %}
+
 <h2 class="project-category">{{ category }}</h2>
 {% assign categorized_projects = site.projects | where: "category", category %}
 {% assign sorted_projects = categorized_projects | sort: "importance" %}
