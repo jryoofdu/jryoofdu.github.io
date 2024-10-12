@@ -109,7 +109,8 @@
         <a href="{{ entry.html | relative_url }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
       {% endif %}
       {% if entry.pdf %}
-        <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+        <a href="{{ entry.pdf | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
+        {% comment %} <a href="{{ entry.html | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a> {% endcomment %}
       {% endif %}
       {% if entry.supp %}
         <a href="{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
