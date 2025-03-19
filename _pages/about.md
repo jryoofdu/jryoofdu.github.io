@@ -28,4 +28,5 @@ I am looking for motivated students and I want to be a great adviser. I believe 
   <li>Operating systems</li>
   <li>Energy efficienct hardware/software co-design</li>
   <li>Emerging workload and system characterization</li>
+  <li>Education and learning technology</li>
 </ul>
