@@ -184,6 +184,9 @@ latest_posts:
 # Jekyll settings
 # -----------------------------------------------------------------------------
 
+# Server settings
+port: 8080 # custom port for local development
+
 # Markdown and syntax highlight
 markdown: kramdown
 highlighter: rouge
