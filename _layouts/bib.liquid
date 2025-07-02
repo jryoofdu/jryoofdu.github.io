@@ -16,7 +16,8 @@
         {%- if forloop.first == false -%}, {% endif -%}
         {%- if forloop.last and author_array_limit == author_array_size -%}and {% endif -%}
 
-        {%- if author.first == 'Jeeho' and author.last == 'Ryoo' -%}
+        {%- assign clean_last_name = author.last | remove: '*' -%}
+        {%- if author.first == 'Jeeho' and clean_last_name == 'Ryoo' -%}
           <em style="border-bottom: 1px solid;">{{- author_full_name -}}</em>
         {%- elsif coauthor_url -%}
           <a href="{{ coauthor_url }}">{{- author_full_name -}}</a>
