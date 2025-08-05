@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: Assistant Professor<br><a href='https://www.fdu.edu/academics/colleges-schools/olsen/'>Olson College of Engineering and Science</a><br><a href='https://www.fdu.edu/'>Fairleigh Dickinson University</a><br><br>239-842 Cambie St<br>Vancouver, BC  V6B 2P6<br>778-726-4199<br> j.ryoo@fdu.edu
+subtitle: Assistant Professor<br><a href='https://www.fdu.edu/academics/colleges-schools/olsen/'>Olsen College of Engineering and Science</a><br><a href='https://www.fdu.edu/'>Fairleigh Dickinson University</a><br><br>239-842 Cambie St<br>Vancouver, BC  V6B 2P6<br>778-726-4199<br> j.ryoo@fdu.edu
 cv_pdf: resume.pdf
 
 profile:
@@ -15,7 +15,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I am an assistant professor in the Olson College of Engineering and Science at Fairleigh Dickinson University and lead the Computer Systems Laboratory at FDU-Vancouver. My research group largely works in workload characterization, computer architecture and operating systems. Specifically, my work improves memory systems in the computer system's domain by analyzing workloads. In learning technology domain, my research focuses on generative artificial intelligence in computer science education by developing an application and deploying it in real classroom settings.
+I am an assistant professor in the Olsen College of Engineering and Science at Fairleigh Dickinson University and lead the Computer Systems Laboratory at FDU-Vancouver. My research group largely works in workload characterization, computer architecture and operating systems. Specifically, my work improves memory systems in the computer system's domain by analyzing workloads. In learning technology domain, my research focuses on generative artificial intelligence in computer science education by developing an application and deploying it in real classroom settings.
 
 Prior to joining FDU, I was a faculty member in the School of Computing and Academic Studies at British Columbia Institute of Technology. I was a software engineer at Oracle(2017) and ARM(2018) in San Francisco Bay Area. I received my Ph.D.(2017) and M.S.(2014) in Electrical and Computer Engineering at the University of Texas at Austin. I recieved a B.S.(2011) in Electrical and Computer Engineering at Cornell University.
 
