@@ -7,6 +7,10 @@ nav: true
 nav_order: 3
 ---
 
-<meta http-equiv="refresh" content="0; url={{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}" />
+<div class="cv-container" style="width: 100%; height: 100vh;">
+  <embed src="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}" type="application/pdf" width="100%" height="100%" />
+</div>
 
-If you are not redirected automatically, follow the [link to CV]({{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}){:target="\_blank" rel="noopener noreferrer"}.
+<p style="margin-top: 1rem;">
+  If the PDF doesn't display, you can <a href="{{ page.cv_pdf | prepend: 'assets/pdf/' | relative_url }}" target="_blank" rel="noopener noreferrer">download it here</a>.
+</p>
